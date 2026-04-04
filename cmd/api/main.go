@@ -15,16 +15,16 @@ func main() {
 	ctx := context.Background()
 
 	// initialize the app
-	app, err := app.New(ctx)
+	a, err := app.New(ctx)
 	if err != nil {
 		log.Fatalf("failed to initialize app: %v", err)
 	}
 	defer func() {
-		if err := app.Close(ctx); err != nil {
+		if err := a.Close(ctx); err != nil {
 			log.Printf("failed to close app resources: %v", err)
 		}
 	}()
-	router := httpserver.NewRouter()
+	router := httpserver.NewRouter(a)
 	// standard go type that runs the http server
 	srv := &http.Server{
 		Addr:              ":5000",

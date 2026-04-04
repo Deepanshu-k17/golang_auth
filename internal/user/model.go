@@ -3,26 +3,22 @@ package user
 import (
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
-
-	ID primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	ID primitive.objectID `bson:"_id,omitempty" json:"id"`
-
-	Email    string `bson:"email" json:"email"`
-	Password string `bson:"password" json:"-"`
-
-	Role string `bson:"role" json:"role"`
-
-	CreatedAt time.Time `bson:"created_at" json:"created_at"`
-	UpdatedAt time.Time `bson:"updated_at" json:"updated_at"`
+type User struct {
+	ID        bson.ObjectID `bson:"_id,omitempty" json:"id"`
+	Email     string        `bson:"email" json:"email"`
+	Password  string        `bson:"password" json:"-"`
+	Role      string        `bson:"role" json:"role"`
+	CreatedAt time.Time     `bson:"created_at" json:"created_at"`
+	UpdatedAt time.Time     `bson:"updated_at" json:"updated_at"`
 }
 
 type PublicUser struct {
 	ID        string    `json:"id"`
+	Email     string    `json:"email"` // Added this so ToPublic works
 	Role      string    `json:"role"`
-	Role      string    ` json:"role"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

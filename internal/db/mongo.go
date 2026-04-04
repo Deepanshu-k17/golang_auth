@@ -6,8 +6,8 @@ import (
 	"go-auth/internal/config"
 	"time"
 
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 type Mongo struct {
@@ -20,7 +20,7 @@ func Connect(ctx context.Context, cfg config.Config) (*Mongo, error) {
 	defer cancel()
 
 	ClientOpts := options.Client().ApplyURI(cfg.MongoURI)
-	client, err := mongo.Connect(connectCtx, ClientOpts)
+	client, err := mongo.Connect(ClientOpts)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to MongoDB: %w", err)
 	}
